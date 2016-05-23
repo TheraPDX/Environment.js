@@ -54,8 +54,8 @@ var _ = require('underscore');
 var later = require('later');
 var EventEmitter = require('events');
 
-var Thing = function (_EventEmitter) {
-  babelHelpers.inherits(Thing, _EventEmitter);
+var Environment = function (_EventEmitter) {
+  babelHelpers.inherits(Environment, _EventEmitter);
 
   /**
    * Constructs a new Thing object. A Thing is an extension of [node's built-in 
@@ -64,30 +64,37 @@ var Thing = function (_EventEmitter) {
    * @return     A new thing object
   */
 
-  function Thing(config) {
-    babelHelpers.classCallCheck(this, Thing);
+  function Environment(config) {
+    babelHelpers.classCallCheck(this, Environment);
 
-    var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Thing).call(this));
+    var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Environment).call(this));
 
     if (!config) {
-      throw new Error('Thing.js requires an config object.');
+      throw new Error('Environment.js requires an config object.');
     } else {
       _.extend(_this, config);
     }
 
-    _this.registerActions();
-    _this.registerEvents();
-    _this.registerProperties();
+    // TODO: register things.
+    _this.registerThings();
     return _this;
   }
 
   /**
-   * Starts any scheduled actions.
-   * Todo: should also throw errors if actions don't have IDs or functions.
+   * Registers things.
    */
 
 
-  babelHelpers.createClass(Thing, [{
+  babelHelpers.createClass(Environment, [{
+    key: 'registerThings',
+    value: function registerThings() {}
+
+    /**
+     * Starts any scheduled actions.
+     * Todo: should also throw errors if actions don't have IDs or functions.
+     */
+
+  }, {
     key: 'registerActions',
     value: function registerActions() {
       this.scheduledActions = [];
@@ -269,10 +276,10 @@ var Thing = function (_EventEmitter) {
       return scheduledEvent;
     }
   }]);
-  return Thing;
+  return Environment;
 }(EventEmitter);
 
 ;
 
-export default Thing;
-//# sourceMappingURL=Thing.es6.js.map
+export default Environment;
+//# sourceMappingURL=Environment.es6.js.map

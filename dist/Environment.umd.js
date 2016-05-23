@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.Thing = factory());
+  (global.Environment = factory());
 }(this, function () { 'use strict';
 
   var babelHelpers = {};
@@ -60,8 +60,8 @@
   var later = require('later');
   var EventEmitter = require('events');
 
-  var Thing = function (_EventEmitter) {
-    babelHelpers.inherits(Thing, _EventEmitter);
+  var Environment = function (_EventEmitter) {
+    babelHelpers.inherits(Environment, _EventEmitter);
 
     /**
      * Constructs a new Thing object. A Thing is an extension of [node's built-in 
@@ -70,30 +70,37 @@
      * @return     A new thing object
     */
 
-    function Thing(config) {
-      babelHelpers.classCallCheck(this, Thing);
+    function Environment(config) {
+      babelHelpers.classCallCheck(this, Environment);
 
-      var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Thing).call(this));
+      var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Environment).call(this));
 
       if (!config) {
-        throw new Error('Thing.js requires an config object.');
+        throw new Error('Environment.js requires an config object.');
       } else {
         _.extend(_this, config);
       }
 
-      _this.registerActions();
-      _this.registerEvents();
-      _this.registerProperties();
+      // TODO: register things.
+      _this.registerThings();
       return _this;
     }
 
     /**
-     * Starts any scheduled actions.
-     * Todo: should also throw errors if actions don't have IDs or functions.
+     * Registers things.
      */
 
 
-    babelHelpers.createClass(Thing, [{
+    babelHelpers.createClass(Environment, [{
+      key: 'registerThings',
+      value: function registerThings() {}
+
+      /**
+       * Starts any scheduled actions.
+       * Todo: should also throw errors if actions don't have IDs or functions.
+       */
+
+    }, {
       key: 'registerActions',
       value: function registerActions() {
         this.scheduledActions = [];
@@ -275,12 +282,12 @@
         return scheduledEvent;
       }
     }]);
-    return Thing;
+    return Environment;
   }(EventEmitter);
 
   ;
 
-  return Thing;
+  return Environment;
 
 }));
-//# sourceMappingURL=Thing.umd.js.map
+//# sourceMappingURL=Environment.umd.js.map
